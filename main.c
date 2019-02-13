@@ -13,6 +13,9 @@ int main() {
   struct matrix *edges;
 
   edges = new_matrix(4, 4);
+  //edges->m[0][0] = 1;
+  //edges->m[0][1] = 2;
 
+  print_matrix(edges);
   free_matrix( edges );
-}  
+}
