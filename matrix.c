@@ -40,6 +40,16 @@ Inputs:  struct matrix *m <-- assumes m is a square matrix
 turns m in to an identity matrix
 */
 void ident(struct matrix *m) {
+  int i,j;
+  for(i=0;i<m->rows;i++){
+		for(j=0;j<m->cols;j++){
+      if(i==j)
+        m->m[i][j] = 1;
+      else
+        m->m[i][j] = 0;
+      }
+    }
+  //print_matrix(m);
 }
 
 

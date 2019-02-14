@@ -21,5 +21,8 @@ int main() {
   edges->m[1][1] = 2;
 
   print_matrix(edges);
+  ident(edges);
+  print_matrix(edges);
+
   free_matrix( edges );
 }
