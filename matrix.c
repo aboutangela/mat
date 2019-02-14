@@ -23,13 +23,15 @@ the template in the top comment
 */
 void print_matrix(struct matrix *m) {
   int i,j;
-  for (i=0;i<m->rows;i++) {
+  for(i=0;i<m->rows+1;i++){
 		for(j=0;j<m->cols;j++){
-      printf("%lf ", m->m[i][j]);
-		}	
+      if(i==m->rows)
+        printf("1        ");
+      else
+        printf("%lf ", m->m[i][j]);
+		}
 		printf("\n");
 	}
-	printf("\n");
 }
 
 /*-------------- void ident() --------------
@@ -140,4 +142,3 @@ void copy_matrix(struct matrix *a, struct matrix *b) {
     for (c=0; c < a->cols; c++)
       b->m[r][c] = a->m[r][c];
 }
-
