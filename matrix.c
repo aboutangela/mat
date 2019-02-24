@@ -23,12 +23,9 @@ the template in the top comment
 */
 void print_matrix(struct matrix *m) {
   int i,j;
-  for(i=0;i<m->rows+1;i++){
-		for(j=0;j<m->cols;j++){
-      if(i==m->rows)
-        printf("1        ");
-      else
-        printf("%lf ", m->m[i][j]);
+  for(i=0;i < m->rows;i++){
+		for(j=0;j < m->cols;j++){
+      printf("%lf ", m->m[i][j]);
 		}
 		printf("\n");
 	}
@@ -64,6 +61,17 @@ a*b -> bint i;
     }
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
+  struct matrix * c = new_matrix(a->rows, b->cols);
+  int i,j,k;
+  for(i = 0; i < c->rows; i++){
+    for(j = 0; j < c->cols; j++){
+      c->m[i][j] = 0;
+      for(k = 0; k < a->cols; k++)
+        c->m[i][j] += a->m[i][k] * b->m[k][j];
+    }
+  }
+  copy_matrix(c,b);
+  free_matrix(c);
 }
 
 

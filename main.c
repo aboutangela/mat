@@ -10,19 +10,59 @@
 int main() {
 
   screen s;
-  struct matrix *edges;
+  color c;
 
+  c.red = MAX_COLOR;
+  c.green = 0;
+  c.blue = 0;
+
+  clear_screen(s);
+
+  struct matrix * one;
+  struct matrix * two;
+  one = new_matrix(4, 4);
+  two = new_matrix(4, 4);
+
+  printf("\nidentity matrix one\n");
+  ident(one);
+  print_matrix(one);
+
+  printf("\npopulate matrix two\n");
+  add_edge(two, 1, 2, 3, 4, 5, 6);
+  print_matrix(two);
+
+  printf("\nmultiply identity matrix one and matrix two\n");
+  matrix_mult(one, two);
+  print_matrix(two);
+
+  printf("\npopulate matrix one\n");
+  add_edge(one, 1, 2, 3, 4, 5, 6);
+  add_edge(one, 1, 2, 3, 4, 5, 6);
+  print_matrix(one);
+
+  printf("\nmultiply matrix one and matrix two\n");
+  matrix_mult(one, two);
+  print_matrix(two);
+
+  free_matrix(one);
+  free_matrix(two);
+
+
+  struct matrix * edges;
   edges = new_matrix(4, 4);
-  edges->m[0][0] = 1;
-  edges->m[0][1] = 2;
-  edges->m[0][2] = 3;
-  edges->m[0][3] = 4;
-  edges->m[1][0] = 1;
-  edges->m[1][1] = 2;
 
-  print_matrix(edges);
-  ident(edges);
-  print_matrix(edges);
+  int i,j;
+  for(i = 250; i > 150; i-=10){
+    for(j = 125; j < 225; j+=10){
+      add_edge(edges, i, j, 0, i+125, j+125, 0);
+      add_edge(edges, i+125, j+125, 0, i, j+250, 0);
+      add_edge(edges, i, j+250, 0, i-125, j+125, 0);
+      add_edge(edges, i-125, j+125, 0, i, j, 0);
+    }
+  }
 
-  free_matrix( edges );
+  draw_lines(edges, s, c);
+  free_matrix(edges);
+  save_extension(s, "pic.png");
+  printf("\npic.png\n");
 }
